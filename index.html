@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>한양대학교 ERICA 지도</title>
+    <title>한양대 ERICA 지도</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -14,6 +14,22 @@
 
     <div id="map"></div>
 
+    <div id="modal" class="hidden">
+        <div class="modal-content">
+            
+            <button class="close-btn" onclick="closeModal()">X 닫기</button>
+            
+            <h2 id="modal-title">건물 이름</h2>
+            
+            <div id="floor-nav">
+                </div>
+
+            <div class="image-container">
+                <img id="floor-image" src="" alt="설계도">
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
-</html>
+</html> 
