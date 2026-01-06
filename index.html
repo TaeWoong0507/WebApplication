@@ -1,37 +1,73 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>한양대 ERICA 지도</title>
+    <title>한양대 ERICA 스마트맵</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="map"></div>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h1><i class="fa-solid fa-graduation-cap"></i> HYU ERICA</h1>
+        </div>
 
-    <div class="search-box">
-        <input type="text" id="search-input" placeholder="건물 이름 (예: 2공)" onkeypress="handleEnter(event)">
-        <button onclick="searchBuilding()">검색</button>
+        <div class="search-container">
+            <div class="input-group">
+                <input type="text" id="search-input" placeholder="건물명 검색 (예: 2공)" onkeypress="handleEnter(event)">
+                <button onclick="searchBuilding()"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            
+            <div class="category-chips">
+                <span class="chip active">전체</span>
+                <span class="chip">공학</span>
+                <span class="chip">인문</span>
+                <span class="chip">복지</span>
+            </div>
+        </div>
+
+        <div class="sidebar-content">
+            <div class="info-card">
+                <h3>💡 이용 안내</h3>
+                <p>
+                    지도에서 건물을 클릭하거나<br>
+                    위 검색창에서 건물을 검색하세요.<br><br>
+                    <small>※ 현재 '제2공학관' 정보만 등록되어 있습니다.</small>
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            © Hanyang Univ. ERICA Campus Map
+        </div>
     </div>
 
+    <div id="map"></div>
+
+    <button id="my-location-btn" onclick="findMyLocation()" title="내 위치 찾기">
+        <i class="fa-solid fa-location-crosshairs"></i>
+    </button>
+
     <div id="modal" class="hidden">
-        <div class="modal-content">
-            
-            <h2 id="modal-title">건물 이름</h2>
-            
-            <div id="floor-nav"></div>
-
-            <div class="image-container">
-                <img id="floor-image" src="" alt="설계도">
+        <div class="modal-overlay"></div> <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">건물 이름</h2>
+                <button class="close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
             </div>
-
-            <button class="close-btn" onclick="closeModal()">X 닫기</button>
+            
+            <div class="modal-body">
+                <div id="floor-nav"></div>
+                <div class="image-container">
+                    <img id="floor-image" src="" alt="설계도 확인">
+                </div>
+            </div>
         </div>
     </div>
 
